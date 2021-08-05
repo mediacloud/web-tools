@@ -1,1 +1,8 @@
-{"assets":{"app_css.css":"app_css.fdf07f9086b9bd4040b1.css","app_css.js":"app_css.6b28fb65.js","app_js.css":"app_js.fdf07f9086b9bd4040b1.css","app_js.js":"app_js.986385c1.js","common_css.css":"common_css.fdf07f9086b9bd4040b1.css","common_css.js":"common_css.85e30808.js"},"publicPath":"/static/gen/explorer/"}
+{
+  "common_css.css": "/static/gen/explorer/common_css.67763276aafc5d6e9fb3.css",
+  "common_css.js": "/static/gen/explorer/common_css.ea46f6b3.js",
+  "app_js.css": "/static/gen/explorer/app_js.67763276aafc5d6e9fb3.css",
+  "app_js.js": "/static/gen/explorer/app_js.db876617.js",
+  "app_css.css": "/static/gen/explorer/app_css.67763276aafc5d6e9fb3.css",
+  "app_css.js": "/static/gen/explorer/app_css.a352a3b0.js"
+}
