@@ -37,7 +37,7 @@
     "intl": "^1.2.5",
     "isomorphic-fetch": "^3.0.0",
     "logic-query-parser": "^0.0.5",
-    "moment": "^2.29.1",
+    "moment": "^2.29.2",
     "node": "^14.16.1",
     "npm": "^7.16.0",
     "prop-types": "^15.7.2",
