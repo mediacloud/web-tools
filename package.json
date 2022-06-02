@@ -43,7 +43,7 @@
     "logic-query-parser": "^0.0.5",
     "moment": "^2.26.0",
     "node-darwin-arm64": "^18.0.0",
-    "npm": "^8.5.5",
+    "npm": "^8.11.0",
     "prop-types": "^15.7.2",
     "raven-for-redux": "^1.4.0",
     "raven-js": "^3.27.2",
