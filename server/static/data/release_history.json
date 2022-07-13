@@ -2,6 +2,17 @@
   "releases": [
     {
       "date": "2022-07-13",
+      "version": "v3.25.5",
+      "notes": [
+        {
+          "apps": [ "sources", "topics", "tools", "explorer" ],
+          "type": "Fix",
+          "note": "More timeout work on API calls"
+        }
+      ]
+    },
+    {
+      "date": "2022-07-13",
       "version": "v3.25.4",
       "notes": [
         {

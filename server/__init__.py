@@ -64,7 +64,7 @@ except ConfigException as e:
 
 # Connect to MediaCloud
 TOOL_API_KEY = config.get('MEDIA_CLOUD_API_KEY')
-MEDIA_CLOUD_API_TIMEOUT = config.get('MEDIA_CLOUD_API_TIMEOUT')
+MEDIA_CLOUD_API_TIMEOUT = int(config.get('MEDIA_CLOUD_API_TIMEOUT'))
 logger.info("MEDIA_CLOUD_API_TIMEOUT set to {}".format(MEDIA_CLOUD_API_TIMEOUT))
 
 mc = mediacloud.api.AdminMediaCloud(TOOL_API_KEY)
