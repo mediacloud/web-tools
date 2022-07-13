@@ -60,3 +60,6 @@ CORENLP_URL = http://stanford-corenlp-server:9000
 
 # API Key for use in communication with YouTube API
 YOUTUBE_API_KEY = 0
+
+# MC_TIMEOUT: seconds we wait for a response from Media Cloud backend (defaults to 30 if empty)
+MEDIA_CLOUD_API_TIMEOUT = 30

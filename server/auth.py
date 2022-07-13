@@ -4,7 +4,7 @@ import flask_login
 import mediacloud.api
 from flask import session
 
-from server import user_db, login_manager
+from server import user_db, login_manager, MEDIA_CLOUD_API_TIMEOUT
 from server.util.config import get_default_config, ConfigException
 
 logger = logging.getLogger(__name__)
@@ -146,6 +146,7 @@ def user_admin_mediacloud_client(user_mc_key=None):
     if mc_key_to_use is None:
         mc_key_to_use = user_mediacloud_key()
     user_mc = mediacloud.api.AdminMediaCloud(mc_key_to_use)
+    user_mc.TIMEOUT_SECS = MEDIA_CLOUD_API_TIMEOUT
     try:
         user_mc.V2_API_URL = config.get('MEDIA_CLOUD_API_URL')
     except ConfigException:
@@ -160,6 +161,7 @@ def user_mediacloud_client(user_mc_key=None):
     if mc_key_to_use is None:
         mc_key_to_use = user_mediacloud_key()
     user_mc = mediacloud.api.MediaCloud(mc_key_to_use)
+    user_mc.TIMEOUT_SECS = MEDIA_CLOUD_API_TIMEOUT
     try:
         user_mc.V2_API_URL = config.get('MEDIA_CLOUD_API_URL')
     except ConfigException:

@@ -1,6 +1,17 @@
 {
   "releases": [
     {
+      "date": "2022-07-13",
+      "version": "v3.25.4",
+      "notes": [
+        {
+          "apps": [ "sources", "topics", "tools", "explorer" ],
+          "type": "Fix",
+          "note": "Add option to configure timeout for API calls"
+        }
+      ]
+    },
+    {
       "date": "2022-05-18",
       "version": "v3.25.3",
       "notes": [
