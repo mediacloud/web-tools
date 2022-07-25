@@ -1,6 +1,17 @@
 {
   "releases": [
     {
+      "date": "2022-07-25",
+      "version": "v3.25.6",
+      "notes": [
+        {
+          "apps": [ "explorer" ],
+          "type": "Fix",
+          "note": "Small typo fixes"
+        }
+      ]
+    },
+    {
       "date": "2022-07-13",
       "version": "v3.25.5",
       "notes": [
