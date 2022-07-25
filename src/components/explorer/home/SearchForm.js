@@ -1,13 +1,12 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { injectIntl, FormattedMessage } from 'react-intl';
+import { injectIntl } from 'react-intl';
 import { Field, reduxForm } from 'redux-form';
 import { Row, Col } from 'react-flexbox-grid/lib';
 import withIntlForm from '../../common/hocs/IntlForm';
 import AppButton from '../../common/AppButton';
 import { emptyString } from '../../../lib/formValidators';
 import messages from '../../../resources/messages';
-import { humanReadableNumber } from '../../../lib/stringUtil';
 
 const localMessages = {
   mainTitle: { id: 'explorer.search.title', defaultMessage: 'Enter Keyword' },
@@ -43,7 +42,7 @@ SearchForm.propTypes = {
   // from context
   intl: PropTypes.object.isRequired,
   renderTextField: PropTypes.func.isRequired,
-  // from form healper
+  // from form helper
   handleSubmit: PropTypes.func,
   pristine: PropTypes.bool.isRequired,
   submitting: PropTypes.bool.isRequired,
