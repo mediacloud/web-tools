@@ -25,7 +25,8 @@ def topic_similar_words(topics_id, snapshots_id, words):
 
 
 def _query_for_json(endpoint, data):
-    response = requests.post("{}{}".format(config.get('WORD_EMBEDDINGS_SERVER_URL'), endpoint), data=data)
+    response = requests.post("{}{}".format(config.get('WORD_EMBEDDINGS_SERVER_URL'), endpoint), data=data,
+                             timeout=30)
     try:
         response_json = response.json()
         if 'results' in response_json:

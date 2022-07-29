@@ -2,6 +2,7 @@ import logging
 from flask import jsonify, request
 import flask_login
 import json
+import requests.exceptions
 
 from server import app
 from server.views import WORD_COUNT_SAMPLE_SIZE, WORD_COUNT_DOWNLOAD_NUM_WORDS, WORD_COUNT_UI_NUM_WORDS
@@ -64,11 +65,16 @@ def query_wordcount(q, fq, ngram_size=1, num_words=WORD_COUNT_UI_NUM_WORDS, samp
     words = [w['term'] for w in word_data]
     # and now add in word2vec model position data
     if len(words) > 0:
-        google_word2vec_data = base_apicache.word2vec_google_2d(words)
-        for i in range(len(google_word2vec_data)):
-            word_data[i]['google_w2v_x'] = google_word2vec_data[i]['x']
-            word_data[i]['google_w2v_y'] = google_word2vec_data[i]['y']
-
+        try:
+            google_word2vec_data = base_apicache.word2vec_google_2d(words)
+            for i in range(len(google_word2vec_data)):
+                word_data[i]['google_w2v_x'] = google_word2vec_data[i]['x']
+                word_data[i]['google_w2v_y'] = google_word2vec_data[i]['y']
+        except requests.exceptions.ConnectionError as ce:
+            # maybe the server is down? just return the counts at least so they render right
+            for w in word_data:
+                word_data[i]['google_w2v_x'] = 0
+                word_data[i]['google_w2v_y'] = 0
     return word_data
 
 
