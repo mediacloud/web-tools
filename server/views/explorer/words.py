@@ -73,8 +73,8 @@ def query_wordcount(q, fq, ngram_size=1, num_words=WORD_COUNT_UI_NUM_WORDS, samp
         except requests.exceptions.ConnectionError as ce:
             # maybe the server is down? just return the counts at least so they render right
             for w in word_data:
-                word_data[i]['google_w2v_x'] = 0
-                word_data[i]['google_w2v_y'] = 0
+                w['google_w2v_x'] = 0
+                w['google_w2v_y'] = 0
     return word_data
 
 
