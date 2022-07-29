@@ -1,6 +1,17 @@
 {
   "releases": [
     {
+      "date": "2022-07-29",
+      "version": "v3.25.7",
+      "notes": [
+        {
+          "apps": [ "explorer" ],
+          "type": "Fix",
+          "note": "Display word counts even if word space isn't working"
+        }
+      ]
+    },
+    {
       "date": "2022-07-28",
       "version": "v3.25.6",
       "notes": [
