@@ -8,6 +8,7 @@ from server.util.tags import processed_for_entities_query_clause, processed_for_
 import server.views.apicache as base_apicache
 from server.views import TAG_SAMPLE_SIZE, TAG_COUNT_SAMPLE_SIZE
 
+from mediacloud.error import MCException
 
 def normalized_and_story_count(q, fq, open_q):
     return {
@@ -42,10 +43,14 @@ def _cached_sentence_list(mc_api_key, q, fq, rows, include_stories=True):
     stories_id_list = [str(s['stories_id']) for s in sentences]
     if (len(stories_id_list) > 0) and include_stories:
         # this is the fastest way to get a list of stories by id
-        stories = base_apicache.story_list(mc_api_key, "stories_id:({})".format(" ".join(stories_id_list)), None)
-        stories_by_id = {s['stories_id']: s for s in stories}  # build a quick lookup table by stories_id
-        for s in sentences:
-            s['story'] = stories_by_id[s['stories_id']]
+        try:
+            stories = base_apicache.story_list(mc_api_key, "stories_id:({})".format(" ".join(stories_id_list)), None)
+            stories_by_id = {s['stories_id']: s for s in stories}  # build a quick lookup table by stories_id
+            for s in sentences:
+                s['story'] = stories_by_id[s['stories_id']]
+        except MCException:
+            for s in sentences:
+                s['story'] = None
     return sentences
 
 

@@ -3,6 +3,7 @@ import React from 'react';
 import { injectIntl } from 'react-intl';
 import { safeStoryDate } from './StoryTable';
 import { googleFavIconUrl, storyDomainName } from '../../lib/urlUtil';
+import { storyPubDateToTimestamp } from '../../lib/dateUtil';
 
 const localMessages = {
   undateable: { id: 'story.publishDate.undateable', defaultMessage: 'Undateable' },
@@ -13,21 +14,27 @@ const localMessages = {
 const StorySentencePreview = ({ sentences, intl }) => (
   <div className="story-sentence-preview">
     {sentences.map((sentence, idx) => {
-      const domainName = storyDomainName(sentence.story);
+      const hasStoryInfo = sentence.story != null;
+      const domainName = hasStoryInfo ? storyDomainName(sentence.story) : null;
       return (
         <div key={idx} className="story-sentence-preview-item">
           <p>{`"...${sentence.sentence}..."`}</p>
-          <h4>
-            <a href={sentence.story.url} rel="noopener noreferrer" target="_blank">
-              <img
-                className="google-icon"
-                src={googleFavIconUrl(domainName)}
-                alt={intl.formatMessage(localMessages.readArticle)}
-              />
-              {sentence.story.medium_name || storyDomainName(sentence.story)}
-              <small>{safeStoryDate(sentence.story, intl).text}</small>
-            </a>
-          </h4>
+          {hasStoryInfo && (
+            <h4>
+              <a href={sentence.story.url} rel="noopener noreferrer" target="_blank">
+                <img
+                  className="google-icon"
+                  src={googleFavIconUrl(domainName)}
+                  alt={intl.formatMessage(localMessages.readArticle)}
+                />
+                {sentence.story.medium_name || domainName}
+                <small>{safeStoryDate(sentence.story, intl).text}</small>
+              </a>
+            </h4>
+          )}
+          {!hasStoryInfo && (
+            <small>{intl.formatDate(storyPubDateToTimestamp(sentence.publish_date))}</small>
+          )}
         </div>
       );
     })}
