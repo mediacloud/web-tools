@@ -71,6 +71,7 @@ def query_wordcount(q, fq, ngram_size=1, num_words=WORD_COUNT_UI_NUM_WORDS, samp
                 word_data[i]['google_w2v_x'] = google_word2vec_data[i]['x']
                 word_data[i]['google_w2v_y'] = google_word2vec_data[i]['y']
         except requests.exceptions.ConnectionError as ce:
+            logger.exception(ce)
             # maybe the server is down? just return the counts at least so they render right
             for w in word_data:
                 w['google_w2v_x'] = 0
