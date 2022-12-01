@@ -62,7 +62,7 @@ const SourceDetailsForm = (props) => {
             label={localMessages.publicNotesHint}
             fullWidth
             disabled={initialValues.disabled}
-            rows={2}
+            minRows={2}
           />
         </Col>
       </Row>
@@ -79,7 +79,7 @@ const SourceDetailsForm = (props) => {
             label={localMessages.editorNotesHint}
             disabled={initialValues.disabled}
             fullWidth
-            rows={2}
+            minRows={2}
           />
         </Col>
       </Row>

@@ -48,7 +48,7 @@ const UserDetailsForm = (props) => {
             name="notes"
             component={renderTextField}
             label={messages.userNotes}
-            rows={4}
+            minRows={4}
             multiline
             fullWidth
           />

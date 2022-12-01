@@ -42,7 +42,7 @@ const TopicSettingsForm = (props) => {
             component={renderTextField}
             fullWidth
             label={formatMessage(localMessages.description)}
-            rows={4}
+            minRows={4}
             multiline
           />
         </Col>

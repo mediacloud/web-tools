@@ -94,7 +94,7 @@ const TermsOfUseContainer = () => {
       <TextField
         multiline
         fullWidth
-        rowsMax={20}
+        maxRows={20}
         label={messages.termsOfUse}
         value={termsOfUseText}
       />

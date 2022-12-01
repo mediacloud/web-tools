@@ -104,7 +104,7 @@ const PrivacyPolicyContainer = () => {
       <TextField
         multiline
         fullWidth
-        rowsMax={20}
+        maxRows={20}
         label={messages.privacyPolicy}
         value={privacyText}
       />

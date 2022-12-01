@@ -40,8 +40,8 @@ class EditOpenWebForm extends React.Component {
                   name="query"
                   component={renderSolrTextField}
                   multiline
-                  rows={2}
-                  rowsMax={4}
+                  minRows={2}
+                  maxRows={4}
                   fullWidth
                 />
                 <small>

@@ -173,7 +173,7 @@ class SourceSelectionRendererRaw extends React.Component {
           component={renderTextField}
           fullWidth
           multiline
-          rows={4}
+          minRows={4}
           label={formatMessage(localMessages.sourceUrlHint)}
         />
         {verifyBtn}

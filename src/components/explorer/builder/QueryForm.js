@@ -170,8 +170,8 @@ class QueryForm extends React.Component {
                     type="text"
                     value={currentQ}
                     multiline
-                    rows={3}
-                    rowsMax={4}
+                    minRows={3}
+                    maxRows={4}
                     fullWidth
                     // onChange={this.focusSelect}
                     // component={renderTextFieldWithFocus}
