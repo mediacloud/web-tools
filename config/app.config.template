@@ -63,3 +63,5 @@ YOUTUBE_API_KEY = 0
 
 # MC_TIMEOUT: seconds we wait for a response from Media Cloud backend (defaults to 30 if empty)
 MEDIA_CLOUD_API_TIMEOUT = 30
+
+SIGNUP_ALLOWED = True

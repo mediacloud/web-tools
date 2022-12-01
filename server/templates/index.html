@@ -17,6 +17,7 @@
     document.appConfig.cookieDomain = '{{ cookie_domain }}';
     document.appConfig.maintenanceMode = {{ maintenance_mode }};
     document.appConfig.systemWarning = "{{ system_warning | safe }}";
+    document.appConfig.signupAllowed = {{ signup_allowed | safe }};
   </script>
   {{ stylesheet_tag("common_css") | safe }}
   {{ stylesheet_tag("app_css") | safe }}

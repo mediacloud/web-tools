@@ -214,11 +214,17 @@ def index():
         system_warning = "" if system_warning == '""' else system_warning
     except ConfigException:
         system_warning = ""
+    try:
+        signup_allowed = config.get('SIGNUP_ALLOWED')
+    except ConfigException:
+        signup_allowed = 1
+
 
     return render_template('index.html',
                            cookie_domain=config.get('COOKIE_DOMAIN'),
                            maintenance_mode=maintenance_mode,
                            system_warning=system_warning,
+                           signup_allowed=signup_allowed
                            )
 
 
