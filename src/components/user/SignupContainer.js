@@ -3,7 +3,7 @@ import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { Grid, Row, Col } from 'react-flexbox-grid/lib';
 import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import { replace } from 'react-router-redux';
 import { signupUser } from '../../actions/userActions';
 // import { updateFeedback } from '../../actions/appActions';
@@ -13,7 +13,7 @@ import messages from '../../resources/messages';
 import { emptyString, invalidEmail, passwordTooShort, stringsDoNotMatch } from '../../lib/formValidators';
 import withIntlForm from '../common/hocs/IntlForm';
 import { addNotice } from '../../actions/appActions';
-import { LEVEL_ERROR } from '../common/Notice';
+import { LEVEL_ERROR, WarningNotice } from '../common/Notice';
 import PageTitle from '../common/PageTitle';
 
 const localMessages = {
@@ -26,6 +26,8 @@ const localMessages = {
   feedback: { id: 'user.signUp.feedback', defaultMessage: 'Successfully signed up.' },
   notesHint: { id: 'user.notes.hint', defaultMessage: 'Tell us a little about what you want to use Media Cloud for' },
   userAlreadyExists: { id: 'user.signUp.error.alreadyExists', defaultMessage: 'Sorry, but a user with that email already exists! Did you <a href="/#/request-password-reset">need to reset your password</a>?' },
+  disabled: { id: 'user.signUp.disabled', defaultMessage: 'We are transitioning to a new search system and have disabled new account signups for now in Explorer and Source Manager.' },
+  newSearch: { id: 'user.signUp.newSearch', defaultMessage: 'Try our <a href="https://search.mediacloud.org/">new search tool</a>.' },
   signupSuccess: { id: 'user.signUp.success',
     defaultMessage: '<h1>Click the link we just emailed you</h1>'
     + '<p>To make sure your email is valid, we have sent you a message with a magic link for you to click.  Click the link in the email to confirm that we got your email right.<p>'
@@ -44,97 +46,109 @@ class SignupContainer extends React.Component {
   render() {
     const { handleSubmit, handleSignupSubmission, pristine, submitting, renderTextField, renderCheckbox } = this.props;
     const { formatMessage } = this.props.intl;
+    const signupAllowed = document.appConfig.signupAllowed === 1;
     return (
       <Grid>
         <PageTitle value={messages.userSignup} />
-        <form onSubmit={handleSubmit(handleSignupSubmission.bind(this))} className="app-form signup-form">
-          <Row>
-            <Col lg={12}>
-              <h1><FormattedMessage {...messages.userSignup} /></h1>
-              <p><FormattedMessage {...localMessages.intro} /></p>
-            </Col>
-          </Row>
-          <Row>
-            <Col lg={6}>
-              <Field
-                name="email"
-                fullWidth
-                component={renderTextField}
-                label={messages.userEmail}
-              />
-            </Col>
-          </Row>
-          <Row>
-            <Col lg={6}>
-              <Field
-                name="fullName"
-                type="text"
-                fullWidth
-                component={renderTextField}
-                label={messages.userFullName}
-              />
-            </Col>
-          </Row>
-          <Row>
-            <Col lg={6}>
-              <Field
-                name="password"
-                type="password"
-                fullWidth
-                component={renderTextField}
-                label={messages.userPassword}
-              />
-            </Col>
-          </Row>
-          <Row>
-            <Col lg={6}>
-              <Field
-                name="confirmPassword"
-                type="password"
-                fullWidth
-                component={renderTextField}
-                label={messages.userConfirmPassword}
-              />
-            </Col>
-          </Row>
-          <Row>
-            <Col lg={6}>
-              <Field
-                name="notes"
-                multiline
-                fullWidth
-                rows={2}
-                rowsMax={4}
-                component={renderTextField}
-                placeholder={formatMessage(localMessages.notesHint)}
-                label={messages.userNotes}
-              />
-            </Col>
-          </Row>
-          <Row>
-            <Col lg={8}>
-              <Field
-                name="has_consented"
-                component={renderCheckbox}
-                fullWidth
-                label={messages.userConsent}
-              />
-            </Col>
-          </Row>
-          <Row>
-            <Captcha onChange={() => this.passedCaptcha()} />
-          </Row>
-          <Row>
-            <Col lg={12}>
-              <AppButton
-                type="submit"
-                label={formatMessage(messages.userSignup)}
-                primary
-                disabled={!this.state.passedCaptcha || pristine || submitting}
-              />
-            </Col>
-          </Row>
-        </form>
+        { !signupAllowed && (
+          <>
+            <br />
+            <br />
+            <WarningNotice>
+              <FormattedMessage {...localMessages.disabled} /> <FormattedHTMLMessage {...localMessages.newSearch} />
+            </WarningNotice>
+          </>
+        )}
+        { signupAllowed && (
+          <form onSubmit={handleSubmit(handleSignupSubmission.bind(this))} className="app-form signup-form">
+            <Row>
+              <Col lg={12}>
+                <h1><FormattedMessage {...messages.userSignup} /></h1>
+                <p><FormattedMessage {...localMessages.intro} /></p>
+              </Col>
+            </Row>
+            <Row>
+              <Col lg={6}>
+                <Field
+                  name="email"
+                  fullWidth
+                  component={renderTextField}
+                  label={messages.userEmail}
+                />
+              </Col>
+            </Row>
+            <Row>
+              <Col lg={6}>
+                <Field
+                  name="fullName"
+                  type="text"
+                  fullWidth
+                  component={renderTextField}
+                  label={messages.userFullName}
+                />
+              </Col>
+            </Row>
+            <Row>
+              <Col lg={6}>
+                <Field
+                  name="password"
+                  type="password"
+                  fullWidth
+                  component={renderTextField}
+                  label={messages.userPassword}
+                />
+              </Col>
+            </Row>
+            <Row>
+              <Col lg={6}>
+                <Field
+                  name="confirmPassword"
+                  type="password"
+                  fullWidth
+                  component={renderTextField}
+                  label={messages.userConfirmPassword}
+                />
+              </Col>
+            </Row>
+            <Row>
+              <Col lg={6}>
+                <Field
+                  name="notes"
+                  multiline
+                  fullWidth
+                  minRows={2}
+                  maxRows={4}
+                  component={renderTextField}
+                  placeholder={formatMessage(localMessages.notesHint)}
+                  label={messages.userNotes}
+                />
+              </Col>
+            </Row>
+            <Row>
+              <Col lg={8}>
+                <Field
+                  name="has_consented"
+                  component={renderCheckbox}
+                  fullWidth
+                  label={messages.userConsent}
+                />
+              </Col>
+            </Row>
+            <Row>
+              <Captcha onChange={() => this.passedCaptcha()} />
+            </Row>
+            <Row>
+              <Col lg={12}>
+                <AppButton
+                  type="submit"
+                  label={formatMessage(messages.userSignup)}
+                  primary
+                  disabled={!this.state.passedCaptcha || pristine || submitting}
+                />
+              </Col>
+            </Row>
+          </form>
+        )}
       </Grid>
     );
   }
