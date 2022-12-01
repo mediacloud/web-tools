@@ -72,7 +72,7 @@ class AppContainer extends React.Component {
                   <span dangerouslySetInnerHTML={{ __html: document.appConfig.systemWarning }} />
                 </WarningNotice>
               </div>
-)}
+            )}
             {content}
           </div>
         </ErrorBoundary>
