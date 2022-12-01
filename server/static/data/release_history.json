@@ -1,6 +1,17 @@
 {
   "releases": [
     {
+      "date": "2022-12-01",
+      "version": "v3.25.10",
+      "notes": [
+        {
+          "apps": [ "explorer", "sources", "tools" ],
+          "type": "Fix",
+          "note": "Disable signup and start migration to new search tool"
+        }
+      ]
+    },
+    {
       "date": "2022-09-27",
       "version": "v3.25.9",
       "notes": [
