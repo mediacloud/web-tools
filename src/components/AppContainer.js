@@ -80,9 +80,7 @@ class AppContainer extends React.Component {
                     <b>As of January 2023 the legacy Media Cloud Explorer and Source Manager tools are no longer available.</b>
                   </p>
                   <p>
-                    They have been replaced by the new <a href="https://search.mediacloud.org/search">Search</a> and
-                    <a href="https://search.mediacloud.org/directory">Directory</a> web tools, which support cross-platform
-                    search  of online content from multiple archives.
+                    They have been replaced by the new <a href="https://search.mediacloud.org/search">Search</a> and <a href="https://search.mediacloud.org/directory">Directory</a> web tools, which support cross-platform search of online content from multiple archives.
                   </p>
                   <AppButton><a href="https://search.mediacloud.org">Try Our New Tools</a></AppButton>
                 </Col>
