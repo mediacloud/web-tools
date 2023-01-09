@@ -4,8 +4,6 @@ import { FormattedMessage, FormattedHTMLMessage, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 // import { hot } from 'react-hot-loader/root';
 import Snackbar from '@material-ui/core/Snackbar';
-import intl from 'intl';  // eslint-disable-line
-import intlEn from 'intl/locale-data/jsonp/en.js';  // eslint-disable-line
 import { Col, Row } from 'react-flexbox-grid/lib';
 import NavToolbar from './common/header/NavToolbar';
 import ErrorBoundary from './common/ErrorBoundary';
@@ -16,6 +14,7 @@ import { assetUrl } from '../lib/assetUtil';
 import AppNoticesContainer from './common/header/AppNoticesContainer';
 import { fetchStaticTags } from '../actions/systemActions';
 import withAsyncData from './common/hocs/AsyncDataContainer';
+import AppButton from './common/AppButton';
 
 const localMessages = {
   privacyPolicy: { id: 'app.privacyPolicy', defaultMessage: 'Read our privacy policy.' },
@@ -39,7 +38,7 @@ class AppContainer extends React.Component {
   };
 
   render() {
-    const { children, feedback, name } = this.props;
+    const { children, feedback, name, user } = this.props;
     let content = children;
     if (document.appConfig.maintenanceMode === 1) {
       content = (
@@ -73,7 +72,23 @@ class AppContainer extends React.Component {
                 </WarningNotice>
               </div>
             )}
-            {content}
+            {user.isLoggedIn && !user.isAdmin && (
+              <Row center="md">
+                <Col lg={6} offset={3}>
+                  <h1>No Longer Available</h1>
+                  <p>
+                    <b>As of January 2023 the legacy Media Cloud Explorer and Source Manager tools are no longer available.</b>
+                  </p>
+                  <p>
+                    They have been replaced by the new <a href="https://search.mediacloud.org/search">Search</a> and
+                    <a href="https://search.mediacloud.org/directory">Directory</a> web tools, which support cross-platform
+                    search  of online content from multiple archives.
+                  </p>
+                  <AppButton><a href="https://search.mediacloud.org">Try Our New Tools</a></AppButton>
+                </Col>
+              </Row>
+            )}
+            {(!user.isLoggedIn || (user.isLoggedIn && user.isAdmin)) && (content)}
           </div>
         </ErrorBoundary>
         <footer>
@@ -124,6 +139,7 @@ AppContainer.propTypes = {
   intl: PropTypes.object.isRequired,
   // from state
   feedback: PropTypes.object.isRequired,
+  user: PropTypes.object.isRequired,
   // from parent
   name: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
@@ -138,6 +154,7 @@ AppContainer.contextTypes = {
 const mapStateToProps = state => ({
   fetchStatus: state.system.staticTags.fetchStatus,
   feedback: state.app.feedback,
+  user: state.user,
 });
 
 const fetchAsyncData = (dispatch) => {
