@@ -1,6 +1,17 @@
 {
   "releases": [
     {
+      "date": "2023-01-09",
+      "version": "v3.25.11",
+      "notes": [
+        {
+          "apps": [ "explorer", "sources", "tools" ],
+          "type": "New",
+          "note": "Turn off this web interface and redirect to new search and directory tools"
+        }
+      ]
+    },
+    {
       "date": "2022-12-01",
       "version": "v3.25.10",
       "notes": [
